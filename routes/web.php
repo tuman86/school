@@ -35,6 +35,10 @@ Route::middleware(['auth'])->group(function () {
   Route::get('/reciept_list/{id}', 'StudentsController@reciept_list');
   Route::post('/post_reciept_fee', 'StudentsController@post_reciept_fee');
   Route::get('/print_reciept/{id}', 'StudentsController@print_reciept');
+  Route::get('/reports', 'StudentsController@reports');
+  Route::post('/get_reports', 'StudentsController@get_reports');
+  Route::get('/my_reports', 'StudentsController@my_reports');
+  Route::post('/get_my_reports', 'StudentsController@get_my_reports');
 
 
   Route::resource('fees', 'FeesController');

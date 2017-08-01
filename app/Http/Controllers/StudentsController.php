@@ -265,4 +265,15 @@ class StudentsController extends Controller
       return view('students.print_reciept', ['student' => Student::findOrFail($recipt_details->first()->student_id), 'feeDetail' => $recipt_details, 'billNumber' => $id] );
     }
 
+    public function my_reports() {
+      return view('students.my_reports');
+    }
+
+    public function get_my_reports(Request $request) {
+      $user_id = Auth::id();
+      //$recipt_details = Reciept::where('user_id', '=', $user_id).whereDate('created_at', $request->input('created_at'))->get();
+      $recipt_details = Reciept::where([['user_id', '=', $user_id], ['created_at', '>=', date('Y-m-d', strtotime($request->input('created_at'))) . ' 00:00:00'], ['created_at', '<=', date('Y-m-d', strtotime($request->input('created_at'))) . ' 23:59:59']])->get();
+      return view('students.my_reports', ['recipt_detail' => $recipt_details]);
+    }
+
 }

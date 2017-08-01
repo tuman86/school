@@ -37,6 +37,8 @@
                         <ul class="dropdown-menu" role="menu">
                             <li>  <a href="{{ route('fees.index') }}">Fees</a></li>
                             <li>  <a href="{{ route('students.index') }}">Students</a></li>
+                            <li>  <a href="{{ URL::to('reports') }}">Reports</a></li>
+                            <li>  <a href="{{ URL::to('my_reports') }}">My Reports</a></li>
                             <li>
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
