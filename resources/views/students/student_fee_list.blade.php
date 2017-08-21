@@ -8,19 +8,38 @@
 .field{
   clear:both;
 }
+h2, b{
+  text-transform: uppercase;
+}
 </style>
-<div class="panel panel-default" id="divIdToPrint">
-  <img class="img-rounded"
+<div class="panel panel-default" id="divIdToPrint" style="height:630px; width:874px">
+  <div style="width:100%;  float:left;">
+    <table>
+      <tr>
+        <td>
+  <div style="width:25%; float:left;">
+  <img style="height:176px;" class="img-rounded"
        src="{{asset("/assets/img/logo.jpg")}}">
-  <h1>Govind Vidya Mandir Rudrapur (U.S.N.)</h1>
-    <div class="panel-heading">Fee Details</div>
+     </div>
+   </td>
+   <td>
+       <div style="width:100%; float:left; padding:17px;">
+  <h1 style="font-size:32px;">GOVIND VIDHYA MANDIR I.COLLEGE
+  RUDRAPUR,U.S.NAGAR,263153</h1>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div style="float: left; margin-top: 15px; border-top: 2px solid; width: 100%;">
+    <div class="panel-heading"><h2>Fee Details</h2></div>
           <div class="panel-body">
-            <b>Student Name :- <?php echo ucfirst($studentFeeDet->student->first_name) ." ".  ucfirst($studentFeeDet->student->last_name) ?></b><br>
-            <b>Class :- <?php echo $studentFeeDet->student->class ?></b><br>
-            <b>Section :- <?php echo ucfirst($studentFeeDet->student->section) ?></b><br>
-            <b>Collected By :- <?php echo $studentFeeDet->user->name ?></b><br>
-            <b>Collection Date :- <?php echo date('Y-m-d', strtotime($studentFeeDet->fee_date)) ?></b><br>
-            <b>Session :- <?php echo $studentFeeDet->student->session ?></b><br><br><br>
+            <b>STUDENT NAME :- <?php echo ucfirst($studentFeeDet->student->first_name) ." ".  ucfirst($studentFeeDet->student->last_name) ?></b><br>
+            <b>CLASS :- <?php echo $studentFeeDet->student->class ?></b><br>
+            <b>SECTION :- <?php echo ucfirst($studentFeeDet->student->section) ?></b><br>
+            <b>COLLECTED BY :- <?php echo $studentFeeDet->user->name ?></b><br>
+            <b>COLLECTION DATE :- <?php echo date('Y-m-d', strtotime($studentFeeDet->fee_date)) ?></b><br>
+            <b>SECTION :- <?php echo $studentFeeDet->student->session ?></b><br><br><br>
   <!-- if there are creation errors, they will show here -->
   <?php $feeTotal = $remaining_bal = 0; ?>
   <table style="width:100%;" border="1">
@@ -68,7 +87,7 @@
 <!-- </td> -->
   </tr>
 </table>
-
+  </div>
     </div>
   </div>
   <input type='button' id='btn' value='Print' onclick='printDiv();'>
@@ -83,7 +102,7 @@
 
   newWin.document.open();
 
-  newWin.document.write('<html><body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
+  newWin.document.write('<html><body onload="window.print()" style="height:630px; width:874px">'+divToPrint.innerHTML+'</body></html>');
 
   newWin.document.close();
 
