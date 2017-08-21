@@ -79,7 +79,7 @@ class StudentsController extends Controller
     public function update(Request $request, Student $student)
     {
       $student = Student::find($student->id);
-      $student->student_admission_id       = $request->input('student_admission_id');
+      //$student->student_admission_id       = $request->input('student_admission_id');
       $student->first_name       = $request->input('first_name');
       $student->last_name      = $request->input('last_name');
       $student->father_name      = $request->input('father_name');

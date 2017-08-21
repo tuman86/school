@@ -7,14 +7,14 @@
   <!-- if there are creation errors, they will show here -->
   <h1>Edit {{ $student->title }}</h1>
       {!! Form::open(['route' => ['students.update', $student->id], 'method' => 'put']) !!}
-      <div class="field">
+      <!-- <div class="field">
         <div class="form-group">
-           <?php echo Form::label('student_admission_id', 'Student Admission Id', ['class' => 'col-md-4 control-label']);?>
+           <?php //echo Form::label('student_admission_id', 'Student Admission Id', ['class' => 'col-md-4 control-label']);?>
            <div class="col-md-6">
-             <?php echo Form::text('student_admission_id', $student->student_admission_id, ['class' => 'form-control']); ?>
+             <?php //echo Form::text('student_admission_id', $student->student_admission_id, ['class' => 'form-control']); ?>
            </div>
        </div>
-     </div>
+     </div> -->
       <div class="field">
         <div class="form-group">
            <?php echo Form::label('first_name', 'First Name', ['class' => 'col-md-4 control-label']);?>

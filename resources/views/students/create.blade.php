@@ -6,14 +6,14 @@
       <div class="panel-body">
   <!-- if there are creation errors, they will show here -->
       {!! Form::open(['url' => 'students']) !!}
-      <div class="field">
+      <!-- <div class="field">
         <div class="form-group">
-           <?php echo Form::label('student_admission_id', 'Student Admission Id', ['class' => 'col-md-4 control-label']);?>
+           <?php //echo Form::label('student_admission_id', 'Student Admission Id', ['class' => 'col-md-4 control-label']);?>
            <div class="col-md-6">
-             <?php echo Form::text('student_admission_id', '', ['class' => 'form-control']); ?>
+             <?php //echo Form::text('student_admission_id', '', ['class' => 'form-control']); ?>
            </div>
        </div>
-     </div>
+     </div> -->
 
       <div class="field">
         <div class="form-group">
