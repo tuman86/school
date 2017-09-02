@@ -38,6 +38,6 @@
     </div>
 
     <!-- Scripts -->
-
+<div align="center">Powered By: Kvatha Technology | All Rights Reserved @ <a href="www.kvathology.com">Kvathology</a></div>
 </body>
 </html>
