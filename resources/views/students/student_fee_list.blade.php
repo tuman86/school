@@ -3,7 +3,7 @@
 @section('content')
 <style>
 .panel{
-  padding: 30px;
+  padding: 5px;
 }
 .field{
   clear:both;
@@ -12,37 +12,37 @@ h2, b{
   text-transform: uppercase;
 }
 </style>
-<div class="panel panel-default" id="divIdToPrint" style="height:630px; width:874px">
-  <div style="width:100%;  float:left;">
+<div class="panel panel-default" id="divIdToPrint" style="height:350px; width:450px;">
+ <div style="width:100%;  ">
     <table>
       <tr>
-        <td>
+        <!-- <td>
   <div style="width:25%; float:left;">
   <img style="height:176px;" class="img-rounded"
        src="{{asset("/assets/img/logo.jpg")}}">
      </div>
-   </td>
+   </td>-->
    <td>
-       <div style="width:100%; float:left; padding:17px;">
-  <h1 style="font-size:32px;">GOVIND VIDHYA MANDIR I.COLLEGE
-  RUDRAPUR,U.S.NAGAR,263153</h1>
+       <div style="width:100%;  padding:2px;">
+  <h1 style="font-size:20px;">Govind Vidhya Mandir Inter College,<br/> Rudrapur, U. S. Nagar, 263153</h1>
 </div>
 </td>
 </tr>
 </table>
 </div>
-<div style="float: left; margin-top: 15px; border-top: 2px solid; width: 100%;">
-    <div class="panel-heading"><h2>Fee Details</h2></div>
-          <div class="panel-body">
-            <b>STUDENT NAME :- <?php echo ucfirst($studentFeeDet->student->first_name) ." ".  ucfirst($studentFeeDet->student->last_name) ?></b><br>
-            <b>CLASS :- <?php echo $studentFeeDet->student->class ?></b><br>
-            <b>SECTION :- <?php echo ucfirst($studentFeeDet->student->section) ?></b><br>
-            <b>COLLECTED BY :- <?php echo $studentFeeDet->user->name ?></b><br>
-            <b>COLLECTION DATE :- <?php echo date('Y-m-d', strtotime($studentFeeDet->fee_date)) ?></b><br>
-            <b>SECTION :- <?php echo $studentFeeDet->student->session ?></b><br><br><br>
+<div style=" border-top: 2px solid; width: 100%;">
+    <div class="panel-heading" ><h2 style="font-size:20px;">Fee Details</h2></div>
+          <div>
+            Student Name :- <?php echo ucfirst($studentFeeDet->student->first_name) ." ".  ucfirst($studentFeeDet->student->last_name) ?>
+			<br/>
+           Class :- <?php echo $studentFeeDet->student->class ?> &nbsp;&nbsp;<?php echo ucfirst($studentFeeDet->student->section) ?>
+			&nbsp;&nbsp;| &nbsp;&nbsp;
+			Session :- <?php echo $studentFeeDet->student->session ?><br>
+            Collected By :- <?php echo $studentFeeDet->user->name ?>&nbsp;&nbsp;| &nbsp;&nbsp;
+            Collection Date :- <?php echo date('Y-m-d', strtotime($studentFeeDet->fee_date)) ?><br/>
   <!-- if there are creation errors, they will show here -->
   <?php $feeTotal = $remaining_bal = 0; ?>
-  <table style="width:100%;" border="1">
+  <table style="width:80%;" border="1" align="center">
     <tr>
       <th align="left">Fee Title</th>
       <th align="left">Fee Amount</th>
@@ -102,7 +102,7 @@ h2, b{
 
   newWin.document.open();
 
-  newWin.document.write('<html><body onload="window.print()" style="height:630px; width:874px">'+divToPrint.innerHTML+'</body></html>');
+  newWin.document.write('<html><body onload="window.print()" style="height:350px; width:450px;">'+divToPrint.innerHTML+'</body></html>');
 
   newWin.document.close();
 

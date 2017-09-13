@@ -9,34 +9,33 @@ h2, b{
   text-transform: uppercase;
 }
 </style>
-<div class="panel panel-default" id="divIdToPrint" style="height:630px; width:874px">
+<div class="panel panel-default" id="divIdToPrint" style="height:350px; width:450px;">
 
-  <div style="width:100%;  float:left;">
+  <div style="width:100%;">
     <table>
       <tr>
-        <td>
+       <!--<td>
   <div style="width:25%; float:left;">
   <img style="height:176px;" class="img-rounded"
        src="{{asset("/assets/img/logo.jpg")}}">
      </div>
-   </td>
+   </td>-->
    <td>
-       <div style="width:100%; float:left; padding:17px;">
-  <h1 style="font-size:32px;">GOVIND VIDHYA MANDIR I.COLLEGE
-  RUDRAPUR,U.S.NAGAR,263153</h1>
+      <div style="width:100%;  padding:2px;">
+  <h1 style="font-size:20px;">Govind Vidhya Mandir Inter College,<br/> Rudrapur, U. S. Nagar, 263153</h1>
 </div>
 </td>
 </tr>
 </table>
 </div>
-<div style="float: left; margin-top: 15px; border-top: 2px solid; width: 100%;">
-    <div class="panel-heading"><h2>FEE DETAILS</h2></div>
+<div style=" border-top: 2px solid; width: 100%;">
+    <div ><h2 style="font-size:20px;">Receipt Detail</h2></div>
           <div class="panel-body">
-            <b>STUDENT NAME :- <?php echo ucfirst($student->first_name) ." ".  ucfirst($student->last_name) ?></b><br>
-            <b>CLASS :- <?php echo $student->class ?></b><br>
-            <b>SECTION :- <?php echo ucfirst($student->section) ?></b><br>
-            <b>BILL NUMBER :- <?php echo $billNumber ?></b><br>
-            <b>RECIEPT NUMBER :- <?php echo $feeDetail->first()->id ?></b><br>
+            Student Name :- <?php echo ucfirst($student->first_name) ." ".  ucfirst($student->last_name) ?><br>
+            Class :- <?php echo $student->class ?>&nbsp;&nbsp;| &nbsp;&nbsp;
+            Section :- <?php echo ucfirst($student->section) ?><br>
+            Fee Bill Number :- <?php echo $billNumber ?>&nbsp;&nbsp;| &nbsp;&nbsp;
+            Receipt Number :- <?php echo $feeDetail->first()->id ?><br>
 
   <!-- if there are creation errors, they will show here -->
   <?php $feeTotal = 0; ?>
@@ -90,7 +89,7 @@ h2, b{
 
   newWin.document.open();
 
-  newWin.document.write('<html><body onload="window.print()" style="height:630px; width:874px">'+divToPrint.innerHTML+'</body></html>');
+  newWin.document.write('<html><body onload="window.print()" style="height:350px; width:450px;">'+divToPrint.innerHTML+'</body></html>');
 
   newWin.document.close();
 
