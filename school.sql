@@ -28,8 +28,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `fees` (
   `id` int(10) UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fee_amount` double(255,2) NOT NULL,
+  `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fee_amount` double(8,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -54,8 +54,8 @@ INSERT INTO `fees` (`id`, `title`, `fee_amount`, `created_at`, `updated_at`) VAL
 
 CREATE TABLE `fee_details` (
   `id` int(10) UNSIGNED NOT NULL,
-  `student_fee_id` int(11) NOT NULL,
-  `fee_id` int(11) NOT NULL,
+  `student_fee_id` int(10) NOT NULL,
+  `fee_id` int(10) NOT NULL,
   `amount` double(8,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -83,14 +83,14 @@ INSERT INTO `fee_details` (`id`, `student_fee_id`, `fee_id`, `amount`, `created_
 
 CREATE TABLE `guardians` (
   `id` int(10) UNSIGNED NOT NULL,
-  `student_id` int(11) NOT NULL,
-  `first_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `contact_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `student_id` int(10) NOT NULL,
+  `first_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contact_number` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `relation` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `relation` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -111,7 +111,7 @@ INSERT INTO `guardians` (`id`, `student_id`, `first_name`, `last_name`, `contact
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL
+  `batch` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -142,7 +142,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -155,9 +155,9 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `reciepts` (
   `id` int(10) UNSIGNED NOT NULL,
-  `student_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `student_fee_id` int(11) NOT NULL,
+  `student_id` int(10) NOT NULL,
+  `user_id` int(10) NOT NULL,
+  `student_fee_id` int(10) NOT NULL,
   `amount` double(8,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -179,8 +179,8 @@ INSERT INTO `reciepts` (`id`, `student_id`, `user_id`, `student_fee_id`, `amount
 
 CREATE TABLE `reciept_details` (
   `id` int(10) UNSIGNED NOT NULL,
-  `student_fee_id` int(11) NOT NULL,
-  `fee_id` int(11) NOT NULL,
+  `student_fee_id` int(10) NOT NULL,
+  `fee_id` int(10) NOT NULL,
   `amount` double(8,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -194,39 +194,39 @@ CREATE TABLE `reciept_details` (
 
 CREATE TABLE `students` (
   `id` int(10) UNSIGNED NOT NULL,
-  `first_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `gender` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `admission_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `first_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gender` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `admission_number` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
   `date_of_birth` datetime NOT NULL,
   `admission_date` datetime NOT NULL,
   `address` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `city` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `state` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `country` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `zip_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `aadhar_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `bank_account_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ifsc_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `city` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `state` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `country` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `zip_code` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `aadhar_number` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bank_account_number` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ifsc_code` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `comments` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `category` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `religion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mothier_tongue` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `rte_act` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `medium_instruction` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `house` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `session` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `class` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `section` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nationality` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `religion` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mothier_tongue` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rte_act` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `medium_instruction` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `house` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `session` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `class` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `section` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nationality` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
   `student_photo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `student_admission_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `father_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mother_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mobile` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `student_admission_id` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `father_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mother_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mobile` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -252,7 +252,7 @@ INSERT INTO `students` (`id`, `first_name`, `last_name`, `email`, `gender`, `adm
 CREATE TABLE `student_classes` (
   `id` int(10) UNSIGNED NOT NULL,
   `student_id` int(10) UNSIGNED NOT NULL,
-  `class_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `class_name` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -265,12 +265,12 @@ CREATE TABLE `student_classes` (
 
 CREATE TABLE `student_fees` (
   `id` int(10) UNSIGNED NOT NULL,
-  `student_id` int(11) NOT NULL,
-  `fee_id` int(11) NOT NULL,
+  `student_id` int(10) NOT NULL,
+  `fee_id` int(10) NOT NULL,
   `amount` double(8,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `user_id` int(11) NOT NULL,
+  `user_id` int(10) NOT NULL,
   `fee_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -291,8 +291,8 @@ INSERT INTO `student_fees` (`id`, `student_id`, `fee_id`, `amount`, `created_at`
 
 CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
