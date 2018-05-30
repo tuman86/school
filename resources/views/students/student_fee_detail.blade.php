@@ -21,6 +21,10 @@
       <th align="left">Section</th>
       <th align="left">Collected By</th>
       <th align="left">Collection Date</th>
+      <th align="left">Total Fee</th>
+      <th align="left">Deposited On due date</th>
+      <th align="left">Reciepts</th>
+      <th align="left">Balance</th>
       <th align="left">Action</th>
     </tr>
   @foreach($studentFeeDet as $value)
@@ -45,7 +49,33 @@
              <?php echo date('d-m-Y',strtotime($value->fee_date));?>
         </td>
         <td>
-          <!-- <a class="btn btn-small btn-info btngrp" href="{{ URL::to('student_fee_edit/' . $value->id) }}">Edit Fee</a> -->
+          <?php
+          $total_amount = $total_deposited = $total_balance = 0;
+          foreach($value->fee_details as $fee_val) {
+            $total_amount  += $fee_val->amount;
+            $total_deposited  += $fee_val->deposited_fee;
+            $total_balance += $fee_val->balance_fee;
+          }
+
+          $total_reciepts = 0;
+          foreach($value->reciepts as $reciept) {
+            $total_reciepts  += $reciept->amount;
+          }
+
+      echo $total_amount;
+          ?>
+        </td>
+        <td>
+             <?php echo ( $total_deposited );?>
+        </td>
+        <td>
+             <?php echo $total_reciepts;?>
+        </td>
+        <td>
+             <?php echo ($total_balance - $total_reciepts);?>
+        </td>
+        <td>
+          <!--a class="btn btn-small btn-info btngrp" href="{{ URL::to('student_fee_edit/' . $value->id) }}">Edit Fee</a-->
           <a class="btn btn-small btn-success btngrp" href="{{ URL::to('student_fee_list/' . $value->id) }}">Show Bill</a>
           <?php if (sizeof($value->reciepts) > 0) { ?>
           <a class="btn btn-small btn-success btngrp" href="{{ URL::to('reciept_list/' . $value->id) }}">Show Reciepts</a>
