@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class StudentFee extends Model
 {
     //
-    protected $fillable = ['student_id', 'fee_id', 'amount', 'fee_date', 'user_id'];
+    protected $fillable = ['student_id', 'fee_id', 'amount', 'fee_date', 'user_id', 'school_session_id'];
 
     public function student()
     {
@@ -22,6 +22,11 @@ class StudentFee extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    public function school_session()
+    {
+        return $this->belongsTo('App\SchoolSession');
     }
 
     public function fee_details()

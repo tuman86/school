@@ -24,4 +24,9 @@ class Reciept extends Model
         return $this->belongsTo('App\Student');
     }
 
+    public function school_session()
+    {
+        return $this->belongsTo('App\SchoolSession');
+    }
+
 }

@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 30, 2017 at 01:04 PM
--- Server version: 5.7.19-0ubuntu0.16.04.1
--- PHP Version: 7.0.18-0ubuntu0.16.04.1
+-- Generation Time: Jun 11, 2018 at 06:49 PM
+-- Server version: 5.7.22-0ubuntu0.16.04.1
+-- PHP Version: 7.0.30-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -28,8 +28,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `fees` (
   `id` int(10) UNSIGNED NOT NULL,
-  `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fee_amount` double(8,2) NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fee_amount` double(255,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -54,26 +54,27 @@ INSERT INTO `fees` (`id`, `title`, `fee_amount`, `created_at`, `updated_at`) VAL
 
 CREATE TABLE `fee_details` (
   `id` int(10) UNSIGNED NOT NULL,
-  `student_fee_id` int(10) NOT NULL,
-  `fee_id` int(10) NOT NULL,
+  `student_fee_id` int(11) NOT NULL,
+  `fee_id` int(11) NOT NULL,
   `amount` double(8,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deposited_fee` double(8,2) NOT NULL,
-  `balance_fee` double(8,2) NOT NULL
+  `balance_fee` double(8,2) NOT NULL,
+  `school_session_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `fee_details`
 --
 
-INSERT INTO `fee_details` (`id`, `student_fee_id`, `fee_id`, `amount`, `created_at`, `updated_at`, `deposited_fee`, `balance_fee`) VALUES
-(1, 1, 1, 120.00, '2017-07-19 11:42:05', '2017-07-19 11:42:05', 120.00, 0.00),
-(2, 1, 2, 500.00, '2017-07-19 11:42:05', '2017-07-19 11:42:05', 500.00, 0.00),
-(3, 2, 2, 500.00, '2017-07-19 11:42:55', '2017-07-19 11:42:55', 500.00, 0.00),
-(4, 2, 2, 500.00, '2017-07-19 11:42:55', '2017-07-19 11:42:55', 500.00, 0.00),
-(5, 3, 1, 120.00, '2017-07-19 11:43:21', '2017-07-19 11:43:21', 120.00, 0.00),
-(6, 3, 2, 500.00, '2017-07-19 11:43:21', '2017-07-19 11:43:21', 300.00, 200.00);
+INSERT INTO `fee_details` (`id`, `student_fee_id`, `fee_id`, `amount`, `created_at`, `updated_at`, `deposited_fee`, `balance_fee`, `school_session_id`) VALUES
+(1, 1, 1, 120.00, '2018-06-11 06:40:50', '2018-06-11 07:48:24', 50.00, 70.00, 1),
+(2, 1, 2, 500.00, '2018-06-11 06:40:50', '2018-06-11 07:48:24', 200.00, 300.00, 1),
+(3, 1, 3, 50.00, '2018-06-11 06:40:50', '2018-06-11 07:48:24', 40.00, 10.00, 1),
+(4, 2, 3, 50.00, '2018-06-11 07:16:39', '2018-06-11 07:48:24', 25.00, 25.00, 1),
+(5, 2, 1, 120.00, '2018-06-11 07:16:39', '2018-06-11 07:48:24', 60.00, 60.00, 1),
+(6, 2, 2, 500.00, '2018-06-11 07:16:39', '2018-06-11 07:48:24', 300.00, 200.00, 1);
 
 -- --------------------------------------------------------
 
@@ -83,14 +84,14 @@ INSERT INTO `fee_details` (`id`, `student_fee_id`, `fee_id`, `amount`, `created_
 
 CREATE TABLE `guardians` (
   `id` int(10) UNSIGNED NOT NULL,
-  `student_id` int(10) NOT NULL,
-  `first_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `last_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `contact_number` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `first_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contact_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `relation` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
+  `relation` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -111,7 +112,7 @@ INSERT INTO `guardians` (`id`, `student_id`, `first_name`, `last_name`, `contact
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(10) NOT NULL
+  `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -133,7 +134,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (16, '2017_07_05_053217_add_adminssion_number_to_students_table', 11),
 (17, '2017_07_06_052228_create_reciept_details_table', 12),
 (18, '2017_07_18_051346_create_reciepts_table', 13),
-(19, '2017_07_30_063937_add_user_detail_to_students_table', 14);
+(19, '2017_07_30_063937_add_user_detail_to_students_table', 14),
+(20, '2018_06_11_103814_create_school_sessions_table', 15),
+(21, '2018_06_11_114020_add_school_session_id_to_fee_details_table', 16),
+(23, '2018_06_11_114222_add_school_session_id_to_reciept_details_table', 17),
+(24, '2018_06_11_114402_add_school_session_id_to_student_fees_table', 18);
 
 -- --------------------------------------------------------
 
@@ -142,7 +147,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -155,9 +160,9 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `reciepts` (
   `id` int(10) UNSIGNED NOT NULL,
-  `student_id` int(10) NOT NULL,
-  `user_id` int(10) NOT NULL,
-  `student_fee_id` int(10) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `student_fee_id` int(11) NOT NULL,
   `amount` double(8,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -168,8 +173,13 @@ CREATE TABLE `reciepts` (
 --
 
 INSERT INTO `reciepts` (`id`, `student_id`, `user_id`, `student_fee_id`, `amount`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, 20.00, '2017-07-19 11:42:14', '2017-07-19 11:42:14'),
-(2, 4, 1, 3, 22.00, '2017-07-19 11:43:35', '2017-07-19 11:43:35');
+(1, 1, 1, 1, 100.00, '2018-05-29 23:01:14', '2018-05-29 23:01:14'),
+(2, 1, 1, 1, 20.00, '2018-05-29 23:02:31', '2018-05-29 23:02:31'),
+(3, 1, 1, 1, 30.00, '2018-05-29 23:02:40', '2018-05-29 23:02:40'),
+(4, 1, 1, 2, 60.00, '2018-05-29 23:03:28', '2018-05-29 23:03:28'),
+(5, 1, 1, 2, 40.00, '2018-05-29 23:03:39', '2018-05-29 23:03:39'),
+(6, 1, 1, 2, 150.00, '2018-06-11 07:30:06', '2018-06-11 07:30:06'),
+(7, 1, 1, 1, 40.00, '2018-06-11 07:33:41', '2018-06-11 07:33:41');
 
 -- --------------------------------------------------------
 
@@ -179,12 +189,34 @@ INSERT INTO `reciepts` (`id`, `student_id`, `user_id`, `student_fee_id`, `amount
 
 CREATE TABLE `reciept_details` (
   `id` int(10) UNSIGNED NOT NULL,
-  `student_fee_id` int(10) NOT NULL,
-  `fee_id` int(10) NOT NULL,
+  `student_fee_id` int(11) NOT NULL,
+  `fee_id` int(11) NOT NULL,
   `amount` double(8,2) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `school_session_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `school_sessions`
+--
+
+CREATE TABLE `school_sessions` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `school_session` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `school_sessions`
+--
+
+INSERT INTO `school_sessions` (`id`, `school_session`, `created_at`, `updated_at`) VALUES
+(1, '2017-18', '2018-06-11 05:42:11', '2018-06-11 06:00:30'),
+(2, '2018-19', '2018-06-11 06:27:30', '2018-06-11 06:27:30');
 
 -- --------------------------------------------------------
 
@@ -194,39 +226,39 @@ CREATE TABLE `reciept_details` (
 
 CREATE TABLE `students` (
   `id` int(10) UNSIGNED NOT NULL,
-  `first_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `last_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `gender` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `admission_number` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `first_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gender` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `admission_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `date_of_birth` datetime NOT NULL,
   `admission_date` datetime NOT NULL,
   `address` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `city` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `state` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `country` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `zip_code` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `aadhar_number` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `bank_account_number` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ifsc_code` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `city` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `state` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `country` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `zip_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `aadhar_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bank_account_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ifsc_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `comments` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `category` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `religion` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mothier_tongue` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `rte_act` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `medium_instruction` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `house` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `session` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `class` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `section` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nationality` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `religion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mothier_tongue` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rte_act` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `medium_instruction` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `house` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `session` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `class` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `section` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nationality` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `student_photo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `student_admission_id` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `father_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mother_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mobile` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL
+  `student_admission_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `father_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mother_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mobile` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -252,7 +284,7 @@ INSERT INTO `students` (`id`, `first_name`, `last_name`, `email`, `gender`, `adm
 CREATE TABLE `student_classes` (
   `id` int(10) UNSIGNED NOT NULL,
   `student_id` int(10) UNSIGNED NOT NULL,
-  `class_name` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `class_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -265,23 +297,23 @@ CREATE TABLE `student_classes` (
 
 CREATE TABLE `student_fees` (
   `id` int(10) UNSIGNED NOT NULL,
-  `student_id` int(10) NOT NULL,
-  `fee_id` int(10) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `fee_id` int(11) NOT NULL,
   `amount` double(8,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `user_id` int(10) NOT NULL,
-  `fee_date` datetime NOT NULL
+  `user_id` int(11) NOT NULL,
+  `fee_date` datetime NOT NULL,
+  `school_session_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `student_fees`
 --
 
-INSERT INTO `student_fees` (`id`, `student_id`, `fee_id`, `amount`, `created_at`, `updated_at`, `user_id`, `fee_date`) VALUES
-(1, 1, 0, 0.00, '2017-07-19 11:42:05', '2017-07-19 11:42:05', 1, '2017-07-19 00:00:00'),
-(2, 3, 0, 0.00, '2017-07-19 11:42:55', '2017-07-19 11:42:55', 1, '2017-07-19 00:00:00'),
-(3, 4, 0, 0.00, '2017-07-19 11:43:21', '2017-07-19 11:43:21', 1, '2017-07-19 00:00:00');
+INSERT INTO `student_fees` (`id`, `student_id`, `fee_id`, `amount`, `created_at`, `updated_at`, `user_id`, `fee_date`, `school_session_id`) VALUES
+(1, 1, 0, 0.00, '2018-06-11 06:40:50', '2018-06-11 07:47:07', 1, '2018-06-11 00:00:00', 1),
+(2, 1, 0, 0.00, '2018-06-11 07:16:38', '2018-06-11 07:47:07', 1, '2017-11-17 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -291,8 +323,8 @@ INSERT INTO `student_fees` (`id`, `student_id`, `fee_id`, `amount`, `created_at`
 
 CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -353,6 +385,12 @@ ALTER TABLE `reciept_details`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `school_sessions`
+--
+ALTER TABLE `school_sessions`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `students`
 --
 ALTER TABLE `students`
@@ -402,17 +440,22 @@ ALTER TABLE `guardians`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT for table `reciepts`
 --
 ALTER TABLE `reciepts`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `reciept_details`
 --
 ALTER TABLE `reciept_details`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `school_sessions`
+--
+ALTER TABLE `school_sessions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `students`
 --
@@ -427,7 +470,7 @@ ALTER TABLE `student_classes`
 -- AUTO_INCREMENT for table `student_fees`
 --
 ALTER TABLE `student_fees`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `users`
 --

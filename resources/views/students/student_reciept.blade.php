@@ -23,6 +23,21 @@
       </div>
   </div>
 
+    <div class="field">
+      <div class="form-group">
+         <?php echo Form::label('session', 'Session', ['class' => 'col-md-4 control-label']);?>
+           <div class="col-md-6">
+             <select class="form-control selected-fee" name="school_session_id">
+
+               <option value=""> Session</option>
+                @foreach($school_session as $session_val)
+                  <option value="{{$session_val->id }}">{{$session_val->school_session}}</option>
+                @endforeach
+              </select>
+           </div>
+     </div>
+   </div>
+
   <div class="field">
     <div class="form-group">
        <?php echo Form::label('amount', 'Enter Amount', ['class' => 'col-md-4 control-label']);?>
