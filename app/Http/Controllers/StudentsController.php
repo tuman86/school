@@ -9,6 +9,7 @@ use Auth;
 use App\FeeDetail;
 use App\RecieptDetail;
 use App\Reciept;
+use App\SchoolSession;
 
 
 class StudentsController extends Controller
@@ -141,7 +142,11 @@ class StudentsController extends Controller
 
     public function student_fee($id)
     {
-        return view('students.student_fee', ['student' => Student::findOrFail($id), 'fees' => Fee::All()]);
+        return view('students.student_fee', [
+          'student' => Student::findOrFail($id),
+          'fees' => Fee::All(),
+          'school_session' => SchoolSession::All()
+        ]);
     }
 
     public function post_student_fee(Request $request)
@@ -153,6 +158,7 @@ class StudentsController extends Controller
       $fee_detail = new FeeDetail;
       //$reciept_detail = new RecieptDetail;
       $fee->student_id = $request->input('student_id');
+      $fee->school_session_id = $request->input('school_session_id');
       $fee->user_id = $user_id;
       $fee->fee_date = $request->input('fee_date');
       $fee->save();
@@ -162,7 +168,14 @@ class StudentsController extends Controller
           //if (!empty($val['fee'])) {
             $fee_stu = explode('+', $val['fee']);
             $balance_fee = ($fee_stu[1] - $val['amount']);
-            $fee_detail->create(['fee_id' => $fee_stu[0], 'amount' =>$fee_stu[1],  'student_fee_id' => $fee->id, 'deposited_fee' => $val['amount'], 'balance_fee' => $balance_fee]);
+            $fee_detail->create([
+              'fee_id' => $fee_stu[0],
+              'amount' =>$fee_stu[1],
+              'student_fee_id' => $fee->id,
+              'deposited_fee' => $val['amount'],
+              'balance_fee' => $balance_fee,
+              'school_session_id' => $fee->school_session_id,
+            ]);
             //$reciept_detail->create(['fee_id' => $fee_stu[0], 'amount' =>$val['amount'],  'student_fee_id' => $fee->id]);
           //}
         }
@@ -170,9 +183,17 @@ class StudentsController extends Controller
       return redirect()->action('StudentsController@student_fee_detail', ['id' => $request->input('student_id')]);
     }
 
-    public function student_fee_detail($id){
-      $studentFeeDet = StudentFee::where('student_id', $id)->get();
-      return view('students.student_fee_detail', ['studentFeeDet' => $studentFeeDet, 'student' => Student::find($id)]);
+    public function student_fee_detail(Request $request, $id){
+      $selected_session = !empty($request->session) ? $request->session : SchoolSession::orderBy('created_at', 'desc')->first()->id;
+      $studentFeeDet = StudentFee::where('student_id', $id)
+                      ->where('school_session_id', $selected_session)
+                      ->get();
+      return view('students.student_fee_detail', [
+        'studentFeeDet' => $studentFeeDet,
+        'student' => Student::find($id),
+        'school_session' => SchoolSession::All(),
+        'selected_session' => $selected_session
+      ]);
     }
 
     public function student_fee_list($id){
@@ -217,7 +238,10 @@ class StudentsController extends Controller
 
     public function student_reciept($id)
     {
-        return view('students.student_reciept', ['studentFeeDetail' => StudentFee::findOrFail($id)]);
+        return view('students.student_reciept', [
+          'studentFeeDetail' => StudentFee::findOrFail($id),
+          'school_session' => SchoolSession::All()
+        ]);
     }
 
     public function post_reciept_fee(Request $request) {

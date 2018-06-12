@@ -22,7 +22,7 @@
         <input name="section" value="{{$student->section}}" type="hidden">
       </div>
   </div>
-  <div class="field" style="margin-bottom: 20px; float: left; clear: both;">
+  <div class="field" style="margin-bottom: 20px; float: left; clear: both;  width: 100%;">
     <div class="form-group">
        <?php echo Form::label('fee_date', 'Fee Date', ['class' => 'col-md-4 control-label']);?>
        <div class="col-md-6">
@@ -30,6 +30,21 @@
        </div>
    </div>
  </div>
+
+ <div class="field" style="margin-bottom: 20px; float: left; clear: both; width: 100%;">
+   <div class="form-group">
+      <?php echo Form::label('school_session', 'Session', ['class' => 'col-md-4 control-label']);?>
+      <div class="col-md-6">
+        <select class="form-control selected-fee" name="school_session_id">
+
+          <option value=""> Session</option>
+           @foreach($school_session as $session_val)
+             <option value="{{$session_val->id }}">{{$session_val->school_session}}</option>
+           @endforeach
+         </select>
+      </div>
+  </div>
+</div>
       <div class="field">
         <div class="form-group new-input-set">
           <div class="col-md-5">
@@ -119,7 +134,7 @@
     $('#totalSumB').show();
     $('#totalFeeAmountSpan').text(amnt_sum);
   })
-  
+
   $(document).on('blur', '.fee-amnt', function(e){
     e.preventDefault();
     _this = $(this);

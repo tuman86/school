@@ -43,4 +43,6 @@ Route::middleware(['auth'])->group(function () {
 
   Route::resource('fees', 'FeesController');
   Route::resource('guardians', 'GuardiansController');
+  Route::resource('school_sessions', 'SchoolSessionController');
+  Route::get('/update_all_records', 'SchoolSessionController@update_all_records');
 });

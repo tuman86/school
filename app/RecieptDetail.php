@@ -19,4 +19,9 @@ class RecieptDetail extends Model
         return $this->belongsTo('App\Fee');
     }
 
+    public function school_session()
+    {
+        return $this->belongsTo('App\SchoolSession');
+    }
+
 }

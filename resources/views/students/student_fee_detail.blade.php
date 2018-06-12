@@ -10,7 +10,15 @@
     <div class="panel-heading">Fee Details</div>
     <a href="{{ URL::to('student_fee', $student->id) }}" style="float:right;margin-right:10px;"> Submit Fees</a>
           <div class="panel-body">
+            <div class="col-md-2">
+              <select class="form-control selected-fee" name="school_session_id" id ="school_session_id">
 
+                <option value="">Select Session</option>
+                 @foreach($school_session as $session_val)
+                   <option value="{{$session_val->id }}" <?php echo ($session_val->id == $selected_session ? "selected" : "")?>>{{$session_val->school_session}}</option>
+                 @endforeach
+               </select>
+            </div>
   <!-- if there are creation errors, they will show here -->
   <?php $feeTotal = 0; ?>
   <table style="width:100%;" class="table table-striped projects_list_table">
@@ -19,6 +27,7 @@
       <th align="left">Student Name</th>
       <th align="left">Class</th>
       <th align="left">Section</th>
+      <th align="left">Session</th>
       <th align="left">Collected By</th>
       <th align="left">Collection Date</th>
       <th align="left">Total Fee</th>
@@ -42,6 +51,9 @@
           <td>
            <?php echo ucfirst($value->student->section);?>
          </td>
+         <td>
+          <?php echo (!empty($value->school_session) ? $value->school_session->school_session : '-');?>
+        </td>
          <td>
           <?php echo ucfirst($value->user->name);?>
         </td>
@@ -91,4 +103,12 @@
     </div>
   </div>
 <div>
+  <script>
+  $(document).on('change', '#school_session_id', function(e) {
+    e.preventDefault();
+    page_url = window.location.href;
+    selected_session = $(this).val();
+    window.location.href = page_url + '?session=' + selected_session
+  })
+  </script>
 @endsection
