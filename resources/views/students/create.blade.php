@@ -240,11 +240,17 @@
  </div>
 </div>
 
-<div class="field">
+<div class="field" style="margin-bottom: 20px; float: left; clear: both; width: 100%;">
   <div class="form-group">
-     <?php echo Form::label('session', 'Session', ['class' => 'col-md-4 control-label']);?>
+     <?php echo Form::label('school_session', 'Session', ['class' => 'col-md-4 control-label']);?>
      <div class="col-md-6">
-       <?php echo Form::text('session', null, ['placeholder' => 'Enter Session e.g. 2017-18'],  ['class' => 'form-control']); ?>
+       <select class="form-control selected-fee" name="session">
+
+         <option value=""> Session</option>
+          @foreach($school_session as $session_val)
+            <option value="{{$session_val->school_session }}">{{$session_val->school_session}}</option>
+          @endforeach
+        </select>
      </div>
  </div>
 </div>

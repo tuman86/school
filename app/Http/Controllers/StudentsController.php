@@ -10,10 +10,12 @@ use App\FeeDetail;
 use App\RecieptDetail;
 use App\Reciept;
 use App\SchoolSession;
+use App\StudentClassRecord;
 
 
 class StudentsController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -31,7 +33,7 @@ class StudentsController extends Controller
      */
     public function create()
     {
-        return view('students.create');
+        return view('students.create', ['school_session' => SchoolSession::All()]);
     }
 
     /**
@@ -43,7 +45,17 @@ class StudentsController extends Controller
     public function store(Request $request)
     {
       $student = new Student;
-      $student->create($request->all());
+      $stds = $student->create($request->all());
+      $studentSession = new StudentClassRecord;
+      $schoolSession = SchoolSession::where(
+        'school_session', $stds->session
+        )->get();
+        $session_id = $schoolSession[0]->id;
+      StudentClassRecord::create([
+        'student_id' => $stds->id,
+        'class' => $stds->class,
+        'school_session_id' =>  $session_id
+      ]);
       return redirect('students');
     }
 
@@ -188,11 +200,17 @@ class StudentsController extends Controller
       $studentFeeDet = StudentFee::where('student_id', $id)
                       ->where('school_session_id', $selected_session)
                       ->get();
+
+      $studentClass = StudentClassRecord::where('student_id', $id)
+                      ->where('school_session_id', $selected_session)
+                      ->first();
+      $selectedSessionClass = !empty($studentClass) ? $studentClass->class : 'Check manually';
       return view('students.student_fee_detail', [
         'studentFeeDet' => $studentFeeDet,
         'student' => Student::find($id),
         'school_session' => SchoolSession::All(),
-        'selected_session' => $selected_session
+        'selected_session' => $selected_session,
+        'student_class' => $selectedSessionClass
       ]);
     }
 

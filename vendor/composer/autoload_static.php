@@ -334,6 +334,7 @@ class ComposerStaticInitabb62456222c3bd4db2cfdc3e2e9f3d5
         'CreateRecieptDetailsTable' => __DIR__ . '/../..' . '/database/migrations/2017_07_06_052228_create_reciept_details_table.php',
         'CreateRecieptsTable' => __DIR__ . '/../..' . '/database/migrations/2017_07_18_051346_create_reciepts_table.php',
         'CreateSchoolSessionsTable' => __DIR__ . '/../..' . '/database/migrations/2018_06_11_103814_create_school_sessions_table.php',
+        'CreateStudentClassRecordsTable' => __DIR__ . '/../..' . '/database/migrations/2018_07_07_040345_create_student_class_records_table.php',
         'CreateStudentClassesTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_22_025117_create_student_classes_table.php',
         'CreateStudentFeesTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_23_115103_create_student_fees_table.php',
         'CreateStudentsTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_20_094507_create_students_table.php',
