@@ -46,7 +46,7 @@
            <?php echo ucfirst($value->student->first_name) . ' ' . ucfirst($value->student->last_name);?>
          </td>
          <td>
-          <?php echo $value->student->class;?>
+          <?php echo $student_class;?>
         </td>
           <td>
            <?php echo ucfirst($value->student->section);?>

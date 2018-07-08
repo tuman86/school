@@ -22,4 +22,9 @@ class Student extends Model
     {
         return $this->hasMany('App\Guardian');
     }
+
+    public function student_session_records()
+    {
+        return $this->hasMany('App\StudentClassRecord');
+    }
 }

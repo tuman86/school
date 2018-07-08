@@ -27,4 +27,9 @@ class SchoolSession extends Model
     {
         return $this->hasMany('App\Reciept');
     }
+
+    public function student_session_records()
+    {
+        return $this->hasMany('App\StudentClassRecord');
+    }
 }

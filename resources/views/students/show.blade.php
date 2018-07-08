@@ -11,6 +11,7 @@
     <a href="{{ URL::to('student_fee', $student->id) }}" style="float:left;margin-left:10px;"> Submit Fees</a>
     <a href="{{ URL::to('student_fee_detail', $student->id) }}" style="float:left;margin-left:10px;"> Check Student Fees</a>
     <a href="{{ URL::to('guardians?std_id='. $student->id) }}" style="float:left;margin-left:10px;"> Guardians</a>
+    <a href="{{ URL::to('new_session_class', $student->id) }}" style="float:left;margin-left:10px;"> Promote to new class</a>
       <div class="panel-body">
   <!-- if there are creation errors, they will show here -->
   <h1>{{ ucfirst($student->first_name) . ' ' . ucfirst($student->last_name)}}</h1>

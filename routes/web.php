@@ -40,9 +40,12 @@ Route::middleware(['auth'])->group(function () {
   Route::get('/my_reports', 'StudentsController@my_reports');
   Route::post('/get_my_reports', 'StudentsController@get_my_reports');
 
-
   Route::resource('fees', 'FeesController');
   Route::resource('guardians', 'GuardiansController');
   Route::resource('school_sessions', 'SchoolSessionController');
+
   Route::get('/update_all_records', 'SchoolSessionController@update_all_records');
+  Route::get('/new_session_class/{id}', 'SchoolSessionController@new_session_class');
+  Route::post('/update_session_class', 'SchoolSessionController@update_session_class');
+
 });

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 11, 2018 at 06:49 PM
+-- Generation Time: Jul 07, 2018 at 12:31 PM
 -- Server version: 5.7.22-0ubuntu0.16.04.1
 -- PHP Version: 7.0.30-0ubuntu0.16.04.1
 
@@ -138,7 +138,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (20, '2018_06_11_103814_create_school_sessions_table', 15),
 (21, '2018_06_11_114020_add_school_session_id_to_fee_details_table', 16),
 (23, '2018_06_11_114222_add_school_session_id_to_reciept_details_table', 17),
-(24, '2018_06_11_114402_add_school_session_id_to_student_fees_table', 18);
+(24, '2018_06_11_114402_add_school_session_id_to_student_fees_table', 18),
+(26, '2018_07_07_040345_create_student_class_records_table', 19);
 
 -- --------------------------------------------------------
 
@@ -266,14 +267,15 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`id`, `first_name`, `last_name`, `email`, `gender`, `admission_number`, `date_of_birth`, `admission_date`, `address`, `city`, `state`, `country`, `zip_code`, `aadhar_number`, `bank_account_number`, `ifsc_code`, `comments`, `category`, `religion`, `mothier_tongue`, `rte_act`, `medium_instruction`, `house`, `session`, `class`, `section`, `nationality`, `student_photo`, `created_at`, `updated_at`, `student_admission_id`, `father_name`, `mother_name`, `mobile`) VALUES
-(1, 'Test', 'test', 'smdtt86@gmail.com', 'male', '123', '1986-04-22 00:00:00', '2017-06-22 00:00:00', '#10-c street1', 'Lloyds Bank', 'tets', 'test', '12345', '123465798', '123465798', 'avdvdf123', 'testing', 'SC', 'mushlim', 'hindi', 'yes', 'english', 'red', '2017-2018', '11th', 'b', 'Indian', 'test', '2017-06-21 22:31:06', '2017-07-30 01:21:50', '12345', 'test', 'test', '9876543210'),
+(1, 'Test', 'test', 'smdtt86@gmail.com', 'male', '123', '1986-04-22 00:00:00', '2017-06-22 00:00:00', '#10-c street1', 'Lloyds Bank', 'tets', 'test', '12345', '123465798', '123465798', 'avdvdf123', 'testing', 'SC', 'mushlim', 'hindi', 'yes', 'english', 'red', '2018-19', '12th', 'b', 'Indian', 'test', '2017-06-21 22:31:06', '2018-07-07 01:15:35', '12345', 'test', 'test', '9876543210'),
 (3, 'arun', 'kumar', 'arun@gmail.com', 'male', '5768486', '2017-06-22 00:00:00', '2017-06-22 00:00:00', 'abcd', 'fedg', 'ghij', 'klmn', '1234', '123456', '01234567', 'ttrytrytr', 'jytutyutyut', 'general', 'hindu', 'hindi', 'yes', 'hindi', 'red', 'asdf', 'lkg', 'a', 'ghh', 'test', '2017-06-22 10:59:20', '2017-06-22 10:59:20', '', '', '', ''),
 (4, '1234', '5678', 'kumar@gmail.com', 'male', 'werty', '2017-06-22 00:00:00', '2017-06-22 00:00:00', 'dsfhg', 'gfb', 'gfgj', 'ytu', 'erettreyr', 'erte', 'sfgfhfgdgf', 'fdgfh', '86786', 'SC', 'mushlim', 'english', 'no', 'english', 'green', 'fhrguj', 'ukg', 'b', 'fdf', 'test', '2017-06-22 11:01:26', '2017-06-22 11:01:26', '', '', '', ''),
 (6, 'gjg', 'cvcn', 'naveen@gmail.com', 'male', 'fdg', '2017-06-22 00:00:00', '2017-06-22 00:00:00', '1234', '9087', 'etery', 'treyrt', 'ccvvbb', 'ffgh', 'dfgg', 'dfgg', 'fsgfh', 'ST', 'christan', 'hindi', 'yes', 'hindi', 'yellow', 'addf', '1st', 'c', 'sadsg', 'test', '2017-06-22 11:07:05', '2017-06-22 11:07:05', '', '', '', ''),
 (7, 'dsgdf', 'gdgj', 'kamlesh@gmail.com', 'male', 'fsdgf', '2017-06-22 00:00:00', '2017-06-22 00:00:00', 'tj', '43657', '6578', '65476', '2598493086', '657', '5475u', 'reytru', 'tryt', 'general', 'buddhist', 'hindi', 'no', 'hindi', 'red', 'dgfdhfg', '3rd', 'a', 'gfgf', 'test', '2017-06-22 11:12:20', '2017-06-22 11:12:20', '', '', '', ''),
 (8, '35465', '5465', 'sandeep@gmail.com', 'male', 'fgdgg', '2017-06-22 00:00:00', '2017-06-22 00:00:00', 'reyrtu', '465467', '6565', 'ftyur', 'ipipoi', 'gjkfh', 'gdfhfgh', 'try', 'yry', 'SC', 'parsi', 'english', 'yes', 'hindi', 'yellow', 'gfdyty', '4th', 'd', 'dgdfyt', 'test', '2017-06-22 11:14:28', '2017-06-22 11:14:28', '', '', '', ''),
 (9, 'jhfjgfsdfhghjg', 'kjdhjfds', 'jkhdfhdjkghj@gmail.com', 'male', '987678666', '2017-06-23 00:00:00', '2017-06-23 00:00:00', 'jhgjgjgj', 'jhgjhghjg', 'jhgjhghjg', 'jhgjhghjghj', 'hjghjghjghjg', 'hjghghgjhgghj', 'gjhgjhghg', 'hjgjhgjhghjgj', 'hjgjhghjgjhgjg', 'ST', 'sikh', 'english', 'no', 'english', 'yellow', '2017-2018', '2nd', 'd', 'fdf', 'test', '2017-06-23 02:47:40', '2017-06-23 02:47:40', '', '', '', ''),
-(10, 'testttstst', 'testttstst', 'testttstst@gmail.com', 'male', 'testttstst', '2017-06-24 00:00:00', '2017-06-24 00:00:00', 'testttstst', 'testttstst', 'testttstst', 'testttstst', 'testttstst', 'testttstst', 'testttstst', 'testttstst', 'testttstst', 'SC', 'christan', 'hindi', 'yes', 'hindi', 'yellow', '2017-2018', '10th', 'b', 'Indian', 'test', '2017-06-24 00:41:34', '2017-06-24 00:41:34', '', '', '', '');
+(10, 'testttstst', 'testttstst', 'testttstst@gmail.com', 'male', 'testttstst', '2017-06-24 00:00:00', '2017-06-24 00:00:00', 'testttstst', 'testttstst', 'testttstst', 'testttstst', 'testttstst', 'testttstst', 'testttstst', 'testttstst', 'testttstst', 'SC', 'christan', 'hindi', 'yes', 'hindi', 'yellow', '2017-2018', '10th', 'b', 'Indian', 'test', '2017-06-24 00:41:34', '2017-06-24 00:41:34', '', '', '', ''),
+(38, 'Testuser1', 'Testuser1', 'Testuser1@gmail.com', 'male', '789887', '2018-07-04 00:00:00', '2018-07-07 00:00:00', '#10-c SBP homes ext-1 sec-126 Mohali Punjab India', 'Mohali', 'AB', 'India', '140301', '7894561230', '7894561230', '012345', 'test', 'ST', 'mushlim', 'hindi', 'no', 'english', 'red', '2018-19', 'lkg', 'b', 'India', 'test', '2018-07-06 23:52:34', '2018-07-07 01:13:29', '', 'Testuser1', 'Testuser1', '7696347655');
 
 -- --------------------------------------------------------
 
@@ -288,6 +290,31 @@ CREATE TABLE `student_classes` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_class_records`
+--
+
+CREATE TABLE `student_class_records` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `school_session_id` int(11) NOT NULL,
+  `class` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `student_class_records`
+--
+
+INSERT INTO `student_class_records` (`id`, `student_id`, `school_session_id`, `class`, `created_at`, `updated_at`) VALUES
+(4, 38, 2, '6th', '2018-07-06 23:52:34', '2018-07-06 23:52:34'),
+(8, 38, 2, 'lkg', '2018-07-07 01:13:29', '2018-07-07 01:13:29'),
+(9, 1, 2, '12th', '2018-07-07 01:15:35', '2018-07-07 01:15:35'),
+(10, 1, 1, '11th', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -405,6 +432,12 @@ ALTER TABLE `student_classes`
   ADD KEY `student_classes_student_id_foreign` (`student_id`);
 
 --
+-- Indexes for table `student_class_records`
+--
+ALTER TABLE `student_class_records`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `student_fees`
 --
 ALTER TABLE `student_fees`
@@ -440,7 +473,7 @@ ALTER TABLE `guardians`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT for table `reciepts`
 --
@@ -460,12 +493,17 @@ ALTER TABLE `school_sessions`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 --
 -- AUTO_INCREMENT for table `student_classes`
 --
 ALTER TABLE `student_classes`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `student_class_records`
+--
+ALTER TABLE `student_class_records`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `student_fees`
 --

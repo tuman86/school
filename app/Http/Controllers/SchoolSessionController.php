@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\SchoolSession;
 use Illuminate\Http\Request;
+use App\Student;
 use App\Fee;
 use App\StudentFee;
 use Auth;
 use App\FeeDetail;
 use App\RecieptDetail;
 use App\Reciept;
+use App\StudentClassRecord;
 
 class SchoolSessionController extends Controller
 {
@@ -125,5 +127,31 @@ class SchoolSessionController extends Controller
       FeeDetail::where('school_session_id', '=', 0)
       ->update(['school_session_id' => $firstSession]);
       echo 'I am here' . $firstSession;
+    }
+
+    public function new_session_class($id) {
+      return view('school_sessions.new_session_class', [
+        'student_id' => $id,
+        'school_session' => SchoolSession::All()
+      ]);
+    }
+
+    public function update_session_class(Request $request) {
+      $studentClass = new StudentClassRecord;
+      $studentClass->create($request->all());
+
+      $student = Student::find($request->input('student_id'));
+      $schoolSession = SchoolSession::findOrFail($request->input('school_session_id'));
+
+      $student->session      = $schoolSession->school_session;
+      $student->class      = $request->input('class');
+      if ($student->save()) {
+        $request->session()->flash('message.level', 'success');
+        $request->session()->flash('message.content', 'Successfully updated Student Class!');
+      } else {
+        $request->session()->flash('message.level', 'danger');
+        $request->session()->flash('message.content', 'Student class is not updated please try again!');
+      }
+      return redirect('students');
     }
 }
